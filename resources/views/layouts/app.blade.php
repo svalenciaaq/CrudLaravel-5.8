@@ -26,20 +26,23 @@
   <span class="navbar-text mx-auto text-center text-white">
   <h1 class="display-5">@yield('nav-title')</h1>
   </span>
+
+  @yield('log')
+  
 </nav>
 
 <!-- Principal section -->
-<div class="container mb-5 mt-5">     
+<div class="container mb-8 mt-3">     
     @yield('content')
 </div>
 
 <!-- Paginate -->
-<div class = "container">
+<div class = "container mb-5">
   @yield('paginate')
 </div>
 
 <!-- Footer -->
-<footer id="sticky-footer" class="py-4 bg-dark text-white-50 mt-10 fixed-bottom">
+<footer id="sticky-footer" class="py-2 bg-dark text-white-50 fixed-bottom">
     <div class="container text-center">
       <small>Copyright &copy; Konecta</small>
     </div>

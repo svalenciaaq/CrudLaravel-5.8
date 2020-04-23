@@ -12,8 +12,12 @@
 */
 
   
-        
-    
+    Route::get('users/login' , 'Auth\LoginController@index')->name('login');
+    Route::post('users/login' , 'Auth\Logincontroller@login')->name('login-post');    
+    Route::get('users/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::group(['middleware' =>'auth'], function () {
+        Route::resource('asesores','AsesorController');
+    });
 
-Route::resource('asesores', 'AsesorController');
+
 

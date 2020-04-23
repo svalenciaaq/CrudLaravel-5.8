@@ -1,9 +1,13 @@
-@extends('layaouts.app')
+@extends('layouts.app')
 
 
 @section('title', 'Registro de asesores')
 
 @section('nav-title' , 'Registro de asesores')
+
+@section('log')
+<a class ="navbar-brand" href="{{route('logout')}}">Logout</a>
+@endsection
 
 @section('content') 
 

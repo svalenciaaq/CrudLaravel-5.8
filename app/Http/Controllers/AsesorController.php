@@ -18,7 +18,7 @@ class AsesorController extends Controller
      */
     public function index()
     {
-        $asesores=Asesor::orderBy('id','DESC')->paginate(2);
+        $asesores=Asesor::orderBy('id','DESC')->paginate(3);
         return view('asesores.index',compact('asesores')); 
     }
 

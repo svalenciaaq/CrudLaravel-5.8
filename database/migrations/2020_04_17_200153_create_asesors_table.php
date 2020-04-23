@@ -23,6 +23,7 @@ class CreateAsesorsTable extends Migration
             $table->string('sede' , ' 20')->required();
             $table->string('age' , '3')->required();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
