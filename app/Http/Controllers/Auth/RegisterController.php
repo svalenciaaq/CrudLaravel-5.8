@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,18 +28,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'asesores';
+    protected $redirectTo = 'clientes';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
+    
 
     public function index()
     {
@@ -75,18 +71,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->roles()->attach(Role::where('name', 'user')->first());
+
+        return $user;
     }
     
     
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
-    }
+    
 }

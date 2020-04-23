@@ -20,7 +20,7 @@
   <body>
   <!-- Header-Nav -->
 <nav class="navbar navbar-dark bg-dark ">
-  <a class="navbar-brand" href="https://www.grupokonecta.com/">
+  <a class="navbar-brand" href="{{ url('/') }}">
     <img src="{{asset('assets/img/logo.png')}}"  class="d-inline-block align-top logo" alt="">
   </a>
   <span class="navbar-text mx-auto text-center text-white">
@@ -30,12 +30,14 @@
   <ul class="nav navbar-nav navbar-right">
     <!-- Authentication Links -->
     @if (Auth::guest())
-        <li><a href="{{ url('users/register') }}">Register</a></li>
+        <li><a  class = "btn btn-light"href="{{ url('/login') }}">Inicio de sesion</a></li>
     @else
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 {{ Auth::user()->name }} <span class="caret"></span>
             </a>
+
+          
 
             <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ url('users/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
@@ -43,7 +45,6 @@
         </li>
     @endif
 </ul>
-  
 </nav>
 
 <!-- Principal section -->

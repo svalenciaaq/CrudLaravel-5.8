@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'asesores';
+    protected $redirectTo = 'clientes';
 
     /**
      * Create a new controller instance.
@@ -39,7 +39,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('users.index');
+        return view('login.index');
     }
 
 
@@ -56,5 +56,14 @@ class LoginController extends Controller
     public function username()
     {
         return 'email';
+    }
+
+
+    public function redirectPath()
+    {
+       if(auth()->user()->admin){
+           return '/admin';
+       }
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/login';
     }
 }

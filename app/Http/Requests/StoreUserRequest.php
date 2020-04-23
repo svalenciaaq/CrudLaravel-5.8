@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAsesorRequest extends Request
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,10 @@ class StoreAsesorRequest extends Request
     {
         return [
             'name' => 'required|max:30' ,
-            'dni' => 'required|max:10',
-            'tel' => 'required|max:10',
-            'date' => 'required',
-            'gen' => 'required|max:10',
-            'client' => 'required |max:50',
-            'sede' => 'required|max:20'
+            'email' => 'required|max:50',
+            'rol' => 'required|max:10',
+            'password' => 'required|max:20',
+            'password_confirmation' => 'same:password',
         ];
     }
 }
