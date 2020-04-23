@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 <!-- Title -->
-@section('title' , 'login')
+@section('title' , 'Register')
 
 <!-- Nav-Title -->
-@section('nav-title', 'Login')
+@section('nav-title', 'Registro de usuarios')
 
 
 

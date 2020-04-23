@@ -7,6 +7,10 @@
 
 @section('log')
 <a class ="navbar-brand" href="{{route('logout')}}">Logout</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
 @endsection
 
 @section('content') 
