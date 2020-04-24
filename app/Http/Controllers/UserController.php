@@ -48,6 +48,7 @@ class UserController extends Controller
     {
         
         $request->user()->authorizeRoles(['admin']);
+        
         $user= User::create($request->all());
         $user->roles()->attach($request->rol_id);
        

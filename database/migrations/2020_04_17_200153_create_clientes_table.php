@@ -16,7 +16,7 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('name','30')->required();
             $table->string('dni','10')->required()->unique();
-            $table->string('email','50')->required();
+            $table->string('email','50')->required()->unique();
             $table->string('addres', '50')->required();
             $table->timestamps();
             $table->softDeletes();

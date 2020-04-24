@@ -18,9 +18,9 @@ class UserTableSeeder extends Seeder
 
       $user = new User();
 
-      $user->name = "Santiago";
-      $user->email = "sanvalenciaarango@gmail.com";
-      $user->password = bcrypt("santii14");
-      $user-> save();
+      $user->name = "admin";
+      $user->email = "admin@gmail.com";
+      $user->password = "secret";
+      $user->save();
     }
 }
