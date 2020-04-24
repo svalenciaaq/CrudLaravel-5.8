@@ -16,10 +16,8 @@
     Route::get('/login' , 'Auth\LoginController@index')->name('login');
     Route::post('users/login' , 'Auth\Logincontroller@login')->name('login-post');    
     Route::get('users/logout', 'Auth\LoginController@logout')->name('logout');
-    Route::get('users/register', 'Auth\RegisterController@index')->name('register');
-    Route::post('admin/users/create' , 'Auth\RegisterController@create')->name('register-post');
     Route::group(['middleware' =>'auth'], function () {
-        
+        Route::get('/admin' , 'AdminController@index')->name('home-admin');
         Route::resource('clientes','ClientesController');
         Route::resource('admin/users' , 'UserController');
     });

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
-use App\User;
+use Illuminate\Support\Facades\Hash;
 use App\Role;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,11 +30,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         
-        $roles = Role::get();
-
+        $request->user()->authorizeRoles(['admin']);
+        $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
 
@@ -40,26 +44,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClientRequest $request)
+    public function store(StoreUserRequest $request)
     {
+        
+        $request->user()->authorizeRoles(['admin']);
+        $user= User::create($request->all());
+        $user->roles()->attach($request->rol_id);
        
-        // $client = new Clientes();
-
-        // $client->name = $request->input('name');
-        // $client->dni = $request->input('dni');
-        // $client->email = $request->input('email');
-        // $client->addres = $request->input('addres');
-    
-        // $client->save();
-
-        // return redirect('clientes')->with('message' , 'Guardado Satisfactoriamente');
-        
-        
-    //     $dataAsesor = $request->all();
-    //     $edad=20;
-    //     $dataAsesor=array_add($dataAsesor,'age', $edad);
-        
-    //    Asesor::create($dataAsesor);
+        return redirect('admin/users')->with('message' , 'Guardado Satisfactoriamente');
     }
 
     /**
@@ -70,7 +62,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -79,9 +71,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-      
+        
+        $request->user()->authorizeRoles(['admin']);
+        $users = User::find($id);
+        return view('admin.users.edit',compact('users'));
         
     }
 
@@ -92,10 +87,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreClientRequest $request, $id)
+    public function update(StoreUserRequest $request, $id)
     {
-         
+        
+        $request->user()->authorizeRoles(['admin']);
+        $user = User::find($id);
+
+        $user->name = $request->input('name');
+        $user->email= $request->input('email');
+        $user->password = $request->input('password');
+    
+    
+        $user->save();
+
+        return redirect('admin.users.index')
+                                        ->with('message' , 'Actualizacion exitosa');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -103,8 +111,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-      
+        $request->user()->authorizeRoles(['admin']);
+       User::find($id)->delete();
+        return redirect('admin/users')
+                        ->with('success','Item deleted successfully');
     }
 }

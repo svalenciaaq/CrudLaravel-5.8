@@ -40,6 +40,7 @@
           
 
             <ul class="dropdown-menu" role="menu">
+            <li><a href="{{url('admin')}}">Admin</a></li>
                 <li><a href="{{ url('users/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
             </ul>
         </li>
@@ -73,6 +74,7 @@
     <!-- Validation scripts -->
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-    {!! Html::script('assets/js/validate.js') !!}
+    @yield('validate')
+
   </body>
 </html>

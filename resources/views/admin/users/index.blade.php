@@ -15,9 +15,7 @@
     <thead class ="thead-dark">
         <tr>
             <th>Nombre</th>
-            <th>Cedula</th>
             <th>Email</th>
-            <th>Direccion</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -27,14 +25,12 @@
         <tr>
             <!-- Show info -->
         <td class = "align-middle">{{ $user->name}}</td>
-            <td class = "align-middle">{{ $user->dni}}</td>
             <td class = "align-middle">{{ $user->email}}</td>
-            <td class = "align-middle">{{ $user->addres}}</td>
         
             <td class = "aling-middle">
                 <!-- Buttons Accions -->
-                {!! link_to_route('clientes.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary mb-2'] ) !!}
-                {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $user->id],]) !!}
+                {!! link_to_route('users.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary mb-2'] ) !!}
+                {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],]) !!}
                 {!! Form::button('Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger' , 'onClick' =>"return confirm('Estas seguro?');"]) !!} 
                 {!! Form::close() !!}
                 

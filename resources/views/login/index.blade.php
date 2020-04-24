@@ -62,3 +62,7 @@
      </div>
   </div>
 @endsection
+
+@section('validate')
+{!! Html::script('assets/js/validate.js') !!}
+@endsection

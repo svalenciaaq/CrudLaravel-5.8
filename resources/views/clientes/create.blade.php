@@ -33,7 +33,7 @@
 @endif
   <div class="row">
     <div class="col-sm-4 offset-md-4">      
-   {!! Form::open(['route' => 'clientes.store' , 'method' => 'POST', 'class' =>'panel' , 'id'=> 'form-asesor'])!!}
+   {!! Form::open(['route' => 'clientes.store' , 'method' => 'POST', 'class' =>'panel' , 'id'=> 'form-client'])!!}
    
    <!-- Name -->
     <div class="form-group">
@@ -74,7 +74,7 @@
    <div class="form-group">
    <div class="row">
     <div class ="col"> 
-   {!! Form::label('addres', 'Dirrecion') !!}
+   {!! Form::label('addres', 'Direcion') !!}
    {!! Form::text('addres', null, ['class' => 'form-control' , 'placeholder' => 'Direccion']) !!}
      </div>
     </div>
@@ -92,4 +92,9 @@
   </div>
 
   
+@endsection
+
+
+@section('validate')
+{!! Html::script('assets/js/validate.js') !!}
 @endsection

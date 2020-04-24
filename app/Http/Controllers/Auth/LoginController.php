@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'clientes';
+   
 
     /**
      * Create a new controller instance.
@@ -58,12 +59,16 @@ class LoginController extends Controller
         return 'email';
     }
 
-
-    public function redirectPath()
+    public function authenticated()
     {
-       if(auth()->user()->admin){
-           return '/admin';
-       }
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/login';
-    }
+        if(Auth::check()) {
+            if(\Auth::user()->hasRole('admin')) {
+                return redirect('/admin');
+            } else {
+                return redirect('/clientes');
+            }
+        }    
+    
+    
+}
 }

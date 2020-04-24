@@ -30,8 +30,9 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles(['vendedor', 'admin']);
         return view('clientes.create');
     }
 
@@ -43,7 +44,7 @@ class ClientesController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-       
+        
         $client = new Clientes();
 
         $client->name = $request->input('name');
@@ -80,10 +81,11 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
+        $request->user()->authorizeRoles(['vendedor', 'admin']);
         $cliente = Clientes::find($id);
-        return view('asesores.edit',compact('asesores'));
+        return view('clientes.edit',compact('cliente'));
         
     }
 
@@ -96,23 +98,18 @@ class ClientesController extends Controller
      */
     public function update(StoreClientRequest $request, $id)
     {
-         $asesor = Clientes::find($id);
+        $request->user()->authorizeRoles(['vendedor', 'admin']);
+         $client = Clientes::find($id);
 
-        $asesor->name = $request->input('name');
-        $asesor->dni = $request->input('dni');
-        $asesor->tel = $request->input('tel');
-        $asesor->date = $request->input('date');
-        $asesor->gen = $request->input('gen');
-        $asesor->client = $request->input('client');
-        $asesor->sede = $request->input('sede');
-        
-      
-        
-        
-        $asesor->age = $edad;
-        $asesor->save();
+         $client->name = $request->input('name');
+         $client->dni = $request->input('dni');
+         $client->email = $request->input('email');
+         $client->addres = $request->input('addres');
+     
+         $client->save();
+       
 
-        return redirect('asesores')
+        return redirect('clientes')
                                         ->with('message' , 'Actualizacion exitosa');
     }
 
@@ -122,8 +119,9 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+        $request->user()->authorizeRoles(['vendedor', 'admin']);
        Clientes::find($id)->delete();
         return redirect('clientes')
                         ->with('success','Item deleted successfully');

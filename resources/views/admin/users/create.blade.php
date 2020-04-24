@@ -29,7 +29,7 @@
 @endif
   <div class="row">
     <div class="col-sm-4 offset-md-4">      
-   {!! Form::open(['route' => 'register-post' , 'method' => 'POST', 'class' =>'panel' , 'id'=> 'form-asesor'])!!}
+   {!! Form::open(['route' => 'users.store' , 'method' => 'POST', 'class' =>'panel' , 'id'=> 'form-users'])!!}
    
    <!-- Name -->
     <div class="form-group">
@@ -53,17 +53,12 @@
   </div>
 
   <div class="form-group">
-    <ul class="list-unstyled">
-      @foreach($roles as $role)
-        <li>
-            <label>
-            {{ Form::checkbox('roles[]', $role->id, null) }}
-            {{ $role->name }}
-            <em>({{ $role->description }})</em>
-            </label>
-        </li>
-        @endforeach
-      </ul>
+    <div class="row">
+      <div class ="col">
+        {!! Form::label('Rol', 'Rol') !!} 
+        {!! Form::select('rol_id', ['1' => 'Administrador', '2' => 'Vendedor' ], null, ['class'=> 'form-control','placeholder' => 'Escoja un rol'] , ) !!}
+      </div>
+    </div>
   </div>
     
    
@@ -98,4 +93,8 @@
   </div>
 
   
+@endsection
+
+@section('validate')
+{!! Html::script('assets/js/validateUsers.js') !!}
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use Illuminate\Support\Facades\Hash;
 
 
 class User extends Authenticatable 
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -75,5 +76,10 @@ class User extends Authenticatable
     return false;
     }
 
+    public function setPasswordAttribute($pass)
+    {
+        $this->attributes['password'] = Hash::make($pass);
     }
+
+}
 

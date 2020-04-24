@@ -1,25 +1,30 @@
-if ($("#form-client").length > 0) {
-    $('#form-client').validate({
+if ($("#form-users").length > 0) {
+    $('#form-users').validate({
         rules: {
             name: {
                 required: true,
                 maxlength: 30
             },
 
-            dni: {
-                required: true,
-                maxlength: 10,
-                number: true
-            },
 
             email: {
                 required: true,
                 maxlength: 50
             },
 
-            addres: {
+            rol_id: {
                 required: true,
-                maxlength: 50
+                maxlength: 20
+            },
+
+            password: {
+                required: true,
+                maxlength: 20
+
+            },
+            password_confirmation: {
+                required: true,
+                maxlength: 20
 
             },
 
@@ -43,12 +48,23 @@ if ($("#form-client").length > 0) {
 
             },
 
-            addres: {
-                required: "Ingrese la direccion",
-                maxlength: "Direccion no valida"
+            rol_id: {
+                required: "Escoja un rol de usurio",
+                maxlength: 20
+            },
 
+            password: {
+                required: "ingrese la contraseña",
+                maxlength: 20
 
             },
+            password_confirmation: {
+                required: "confirme la contraseña",
+                maxlength: 20
+
+            },
+
+
 
         }
     });
